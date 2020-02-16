@@ -1,17 +1,21 @@
 program main;
 
-// Permet de représenter un entier positif de taille arbitraire 
-// en base 2^32
-// ex: si t est de type int_array et t := [5, 3] alors 
-//     t représente l'entier 5 * (2^32)^0 + 3 * (2^32)^1 = 12884901893
+// Permet de représenter un entier positif de taille
+// arbitraire en base 2^32
+// ex: t = [5, 3] <=> t = 5 * (2^32)^0 + 3 * (2^32)^1 = 12884901893
 type int_array = array of longword;
 
 // Si le chiffre de poids fort est nul, alors il est retiré
-// ex: t = [5, 3, 0] => Normalize(t) => t = [5, 3]
+// ex: t = [5, 3, 0, 0] => Normalize(t) => t = [5, 3]
 procedure Normalize (var t : int_array);
 begin
     while t[length(t)-1] = 0 do 
         SetLength(t, length(t)-1);
+end;
+
+function smaller (a, b: int_array):boolean;
+begin
+    if length (a) 
 end;
 
 var t: int_array;
