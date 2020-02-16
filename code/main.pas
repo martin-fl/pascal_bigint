@@ -6,7 +6,12 @@ program main;
 type int_array = array of longword;
 
 // Si le chiffre de poids fort est nul, alors il est retiré.
-// ex: t = [5, 3, 0, 0] => Normalize(t) => t = [5, 3]
+// ex:
+// ```pascal
+// t := int_array.create (5, 3, 0, 0);
+// Normalize(t);
+// assert (t = int_array.create (5, 3));
+// ```
 procedure Normalize (var t : int_array);
 begin
     while t[length(t) - 1] = 0 do 
