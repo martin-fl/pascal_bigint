@@ -1,0 +1,198 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize a4paper
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section*
+Exercice 2
+\end_layout
+
+\begin_layout Enumerate
+Procédons à la multiplication de 
+\begin_inset Formula $325$
+\end_inset
+
+ par 
+\begin_inset Formula $28$
+\end_inset
+
+ en base 
+\begin_inset Formula $10$
+\end_inset
+
+ :
+\begin_inset Newline newline
+\end_inset
+
+Supposons ces entiers écrits sous forme de 2 tableaux contenant respectivement
+ 3 et 2 chiffres, on a alors 
+\begin_inset Formula 
+\begin{align*}
+325\times28 & =\left[5;2;3\right]\times\left[8;2\right]\\
+\text{(a)} & =10^{0}\times8\times\left[5;2;3\right]+10^{1}\times2\times\left[5;2;3\right]\\
+\text{(\text{b})} & =\left[40;16;24\right]+\left[100;40;60\right]\\
+\text{(\text{c})} & =\left[0;0;6;2\right]+\left[0;0;5;6\right]\\
+\text{(\text{d})} & =\left[0;0;11;8\right]\\
+\text{(\text{e})} & =\left[0;0;1;9\right]\\
+ & =9100
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+On distribue 
+\begin_inset Formula $28$
+\end_inset
+
+ dans 
+\begin_inset Formula $325$
+\end_inset
+
+ en multipliant aussi par la puissance de 
+\begin_inset Formula $10$
+\end_inset
+
+ associée.
+\end_layout
+
+\begin_layout Enumerate
+On effectue les multiplications terme à terme
+\end_layout
+
+\begin_layout Enumerate
+Dans chaque tableau, on procède de gauche à droite en ajoutant le quotient
+ du nombre par 
+\begin_inset Formula $10$
+\end_inset
+
+ à la case suivante (la retenue), et en remplaçant le nombre par le reste
+ obtenu.
+ Lorsqu'on atteint la dernière case, on en crée une nouvelle si besoin
+\end_layout
+
+\begin_layout Enumerate
+On ajoute les tableaux terme à terme
+\end_layout
+
+\begin_layout Enumerate
+On répète (c) sur le tableau obtenu
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+On constate à l'étape (b) que les nombres contenus dans les cases des tableaux
+ ne sont pas dans 
+\begin_inset Formula $\left\{ 0;\dots;10-1\right\} .$
+\end_inset
+
+ Ce dépassement de plage est la raison pour laquelle on utilise la base
+ 
+\begin_inset Formula $2^{32}$
+\end_inset
+
+ et pas 
+\begin_inset Formula $2^{64}$
+\end_inset
+
+.
+ En effet, si nous travaillions en base 
+\begin_inset Formula $2^{64}$
+\end_inset
+
+, en cas de dépassement nous obtiendrions directement le reste (car la machine
+ calcule dans 
+\begin_inset Formula $\mathbb{Z}/2^{64}\mathbb{Z}$
+\end_inset
+
+) mais nous ne pourrions par obtenir la retenue, ce qui fausserait le calcul.
+ En travaillant en base 
+\begin_inset Formula $2^{32}$
+\end_inset
+
+ mais en stockant les entiers sur une plage de longueur 
+\begin_inset Formula $2^{64}$
+\end_inset
+
+, nous pouvons obtenir la retenue et faire des calculs exacts.
+\end_layout
+
+\end_body
+\end_document
