@@ -9,8 +9,8 @@ type int_array = array of longword;
 // ex: t = [5, 3, 0, 0] => Normalize(t) => t = [5, 3]
 procedure Normalize (var t : int_array);
 begin
-    while t[length(t)-1] = 0 do 
-        SetLength(t, length(t)-1);
+    while t[length(t) - 1] = 0 do 
+        SetLength (t, length(t) - 1);
 end;
 
 function smaller (a, b: int_array):boolean;
@@ -21,12 +21,12 @@ end;
 var t: int_array;
     c: longword;
 begin
-    t := int_array.create(5, 3, 0, 3, 4, 0, 0,0,0);
+    t := int_array.create (5, 3, 0, 3, 4, 0, 0,0,0);
     for c in t do
-        write(c, ' ');
-    writeln();
-    Normalize(t);
+        write (c, ' ');
+    writeln;
+    Normalize (t);
     for c in t do
-        write(c, ' ');
-    writeln();
+        write (c, ' ');
+    writeln;
 end.

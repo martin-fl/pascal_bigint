@@ -77,7 +77,11 @@
 
 \begin_body
 
+<<<<<<< HEAD
 \begin_layout Section*
+=======
+\begin_layout Title
+>>>>>>> 1edd7e61bd7932227c6099ba28843b352c1bfdfe
 Exercice 1
 \end_layout
 
@@ -141,12 +145,20 @@ De plus
 \begin_inset Formula 
 \begin{align*}
 m\text{ a \ensuremath{n} chiffres en base 10} & \Longleftrightarrow10^{n-1}\leq m<10^{n}\\
+<<<<<<< HEAD
  & \Longleftrightarrow(n-1)\frac{\ln10}{\ln2}\leq\frac{\ln m}{\ln2}<n\frac{\ln10}{\ln2}
+=======
+ & \Longleftrightarrow(n-1)\frac{\ln10}{\ln2}\leq\frac{\ln m}{\ln2}<n\frac{\ln10}{\ln2}+1
+>>>>>>> 1edd7e61bd7932227c6099ba28843b352c1bfdfe
 \end{align*}
 
 \end_inset
 
+<<<<<<< HEAD
 Donc 
+=======
+ Donc 
+>>>>>>> 1edd7e61bd7932227c6099ba28843b352c1bfdfe
 \begin_inset Formula 
 \[
 (n-1)\frac{\ln10}{\ln2}<q'<n\frac{\ln10}{\ln2}+1
@@ -154,7 +166,11 @@ Donc
 
 \end_inset
 
+<<<<<<< HEAD
 Posons 
+=======
+ Posons 
+>>>>>>> 1edd7e61bd7932227c6099ba28843b352c1bfdfe
 \begin_inset Formula $e=\left|\frac{q'-q}{q}\right|$
 \end_inset
 
@@ -168,7 +184,11 @@ Posons
 
 \end_inset
 
+<<<<<<< HEAD
 Donc à la limite on a 
+=======
+ Donc à la limite on a 
+>>>>>>> 1edd7e61bd7932227c6099ba28843b352c1bfdfe
 \begin_inset Formula 
 \[
 e=1-\frac{\ln10}{8\ln2}\approx0.5848
@@ -176,7 +196,11 @@ e=1-\frac{\ln10}{8\ln2}\approx0.5848
 
 \end_inset
 
+<<<<<<< HEAD
 On voit alors que en stockant les chiffres de 
+=======
+ On voit alors que en stockant les chiffres de 
+>>>>>>> 1edd7e61bd7932227c6099ba28843b352c1bfdfe
 \begin_inset Formula $m$
 \end_inset
 
