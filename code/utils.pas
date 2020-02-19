@@ -2,6 +2,7 @@ unit utils;
 
 interface
 
+
 /// Permet de représenter un entier positif de taille.
 /// arbitraire en base 2^32
 /// ex: t = [5, 3] <=> t = 5 * (2^32)^0 + 3 * (2^32)^1 = 12884901893
@@ -53,3 +54,4 @@ begin
 end;
 
 end.
+
