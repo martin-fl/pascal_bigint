@@ -4,10 +4,18 @@
 \begin_header
 \save_transient_properties true
 \origin unavailable
-\textclass article
+\textclass extarticle
+\begin_preamble
+
+\end_preamble
 \use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
 \maintain_unincluded_children false
-\language english
+\language french
 \language_package default
 \inputencoding auto
 \fontencoding global
@@ -28,7 +36,7 @@
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize default
+\paperfontsize 12
 \spacing single
 \use_hyperref false
 \papersize default
@@ -63,10 +71,10 @@
 \paragraph_indentation default
 \is_math_indent 0
 \math_numbering_side default
-\quotes_style english
+\quotes_style french
 \dynamic_quotes 0
 \papercolumns 1
-\papersides 1
+\papersides 2
 \paperpagestyle default
 \tracking_changes false
 \output_changes false
@@ -78,118 +86,79 @@
 \begin_body
 
 \begin_layout Section*
-Exercice 1
+Exercice 7
 \end_layout
 
-\begin_layout Standard
-Soit 
-\begin_inset Formula $m$
-\end_inset
-
- un entier de 
-\begin_inset Formula $n$
-\end_inset
-
- chiffres en base 10.
- En stockant les chiffres de 
+\begin_layout Enumerate
+Soit un entier 
 \begin_inset Formula $m$
 \end_inset
 
  en base 
-\begin_inset Formula $10$
+\begin_inset Formula $b=2^{32}$
 \end_inset
 
- dans un tableau de byte, le nombre de bits utilisés est 
-\begin_inset Formula $q=8n$
-\end_inset
-
-, car chaque 
-\begin_inset Quotes eld
-\end_inset
-
-case
-\begin_inset Quotes erd
-\end_inset
-
- du tableau utilise 
-\begin_inset Formula $8$
-\end_inset
-
- bits.
- Calculons le nombre 
-\begin_inset Formula $q'$
-\end_inset
-
- de bits utilisés si nous pouvions stocker l'écriture binaire de 
+, alors 
 \begin_inset Formula $m$
 \end_inset
 
- dans la mémoire :
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-m\text{ utilises }q'\text{ bits} & \Longleftrightarrow2^{q'-1}\leq m<2^{q'}\\
- & \Longleftrightarrow q'-1\leq\frac{\ln m}{\ln2}<q'\\
- & \Longleftrightarrow\frac{\ln m}{\ln2}<q'\leq\frac{\ln m}{\ln2}+1
-\end{align*}
-
+ s'écrit : 
+\begin_inset Formula $m=\stackrel[k=0]{r}{\sum}c_{k}b^{k}$
 \end_inset
 
-De plus 
-\begin_inset Formula 
-\begin{align*}
-m\text{ a \ensuremath{n} chiffres en base 10} & \Longleftrightarrow10^{n-1}\leq m<10^{n}\\
- & \Longleftrightarrow(n-1)\frac{\ln10}{\ln2}\leq\frac{\ln m}{\ln2}<n\frac{\ln10}{\ln2}
-\end{align*}
-
+ avec 
+\begin_inset Formula $c_{k}\in\{0;…;b-1\}$
 \end_inset
 
-Donc
-\begin_inset Formula 
-\[
-(n-1)\frac{\ln10}{\ln2}<q'<n\frac{\ln10}{\ln2}+1
-\]
-
-\end_inset
-
-Posons 
-\begin_inset Formula $e=\left|\frac{q'-q}{q}\right|$
+ et 
+\begin_inset Formula $c_{r}\neq0$
 \end_inset
 
 .
- Alors 
+\begin_inset Newline newline
+\end_inset
+
+Dans 
+\begin_inset Formula $ℤ/17ℤ$
+\end_inset
+
+, 
+\begin_inset Formula $\overline{b}=\overline{2^{32}}=\overline{2}^{32}=\left(\left(\left(\underset{=\overline{16}=\overline{-1}}{\underbrace{\left(\overline{2}^{2}\right)^{2}}}\right)^{2}\right)^{2}\right)^{2}=\overline{1}$
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+Ainsi, dans 
+\begin_inset Formula $ℤ/17ℤ$
+\end_inset
+
+, 
 \begin_inset Formula 
 \begin{align*}
- & \left|1-\frac{n\frac{\ln10}{\ln2}-1}{8n}\right|<e<\left|1-\frac{(n-1)\frac{\ln10}{\ln2}}{8n}\right|\\
-\Longleftrightarrow & \left|1-\frac{\ln10}{8\ln2}+\frac{1}{8n}\right|<e<\left|1-\frac{\ln10}{8\ln2}+\frac{\ln10}{8n\ln2}\right|
+\overline{m} & =\overline{\stackrel[k=0]{r}{\sum}c_{k}b^{k}}\\
+ & =\stackrel[k=0]{r}{\sum}\overline{c_{k}b^{k}}\\
+ & =\stackrel[k=0]{r}{\sum}\overline{c_{k}}\times\underset{=\overline{1}}{\underbrace{\overline{b^{k}}}}\\
+ & =\overline{\stackrel[k=0]{r}{\sum}c_{k}}
 \end{align*}
 
 \end_inset
 
-Donc à la limite on a
-\begin_inset Formula 
-\[
-e=1-\frac{\ln10}{8\ln2}\approx0.5848
-\]
 
+\begin_inset Newline newline
 \end_inset
 
-On voit alors que en stockant les chiffres de 
+Donc un entier 
 \begin_inset Formula $m$
 \end_inset
 
  en base 
-\begin_inset Formula $10$
+\begin_inset Formula $b=2^{32}$
 \end_inset
 
- dans un tableau de byte, 
-\begin_inset Formula $58\%$
-\end_inset
-
- de la mémoire est utilisée inutilement par rapport à l'écriture binaire
- classique.
+ est divisible par 17 si, et seulement si, la somme de ses chiffres est
+ divisible par 17.
 \end_layout
 
 \end_body

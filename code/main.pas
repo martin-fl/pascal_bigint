@@ -1,32 +1,10 @@
 program main;
 
-// Permet de représenter un entier positif de taille
-// arbitraire en base 2^32
-// ex: t = [5, 3] <=> t = 5 * (2^32)^0 + 3 * (2^32)^1 = 12884901893
-type int_array = array of longword;
+uses utils;
 
-// Si le chiffre de poids fort est nul, alors il est retiré
-// ex: t = [5, 3, 0, 0] => Normalize(t) => t = [5, 3]
-procedure Normalize (var t : int_array);
+var a, b: int_array;
 begin
-    while t[length(t) - 1] = 0 do 
-        SetLength (t, length(t) - 1);
-end;
-
-function smaller (a, b: int_array):boolean;
-begin
-    if length (a) 
-end;
-
-var t: int_array;
-    c: longword;
-begin
-    t := int_array.create (5, 3, 0, 3, 4, 0, 0,0,0);
-    for c in t do
-        write (c, ' ');
-    writeln;
-    Normalize (t);
-    for c in t do
-        write (c, ' ');
-    writeln;
+  a := int_array.create (5, 3, 12, 3, 4, 1, 21, 0);
+  b := int_array.create (5, 3, 1, 3, 4, 1, 21, 0);
+  writeln (smaller (a, b));
 end.

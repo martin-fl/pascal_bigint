@@ -31,7 +31,7 @@
 \paperfontsize default
 \spacing single
 \use_hyperref false
-\papersize default
+\papersize a4paper
 \use_geometry false
 \use_package amsmath 1
 \use_package amssymb 1
@@ -78,118 +78,101 @@
 \begin_body
 
 \begin_layout Section*
-Exercice 1
+Exercice 4
 \end_layout
 
 \begin_layout Standard
-Soit 
-\begin_inset Formula $m$
+Montrons par récurrence la propriété 
+\begin_inset Formula $P_{N}$
 \end_inset
 
- un entier de 
-\begin_inset Formula $n$
-\end_inset
-
- chiffres en base 10.
- En stockant les chiffres de 
-\begin_inset Formula $m$
-\end_inset
-
- en base 
-\begin_inset Formula $10$
-\end_inset
-
- dans un tableau de byte, le nombre de bits utilisés est 
-\begin_inset Formula $q=8n$
-\end_inset
-
-, car chaque 
-\begin_inset Quotes eld
-\end_inset
-
-case
-\begin_inset Quotes erd
-\end_inset
-
- du tableau utilise 
-\begin_inset Formula $8$
-\end_inset
-
- bits.
- Calculons le nombre 
-\begin_inset Formula $q'$
-\end_inset
-
- de bits utilisés si nous pouvions stocker l'écriture binaire de 
-\begin_inset Formula $m$
-\end_inset
-
- dans la mémoire :
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-m\text{ utilises }q'\text{ bits} & \Longleftrightarrow2^{q'-1}\leq m<2^{q'}\\
- & \Longleftrightarrow q'-1\leq\frac{\ln m}{\ln2}<q'\\
- & \Longleftrightarrow\frac{\ln m}{\ln2}<q'\leq\frac{\ln m}{\ln2}+1
-\end{align*}
-
-\end_inset
-
-De plus 
-\begin_inset Formula 
-\begin{align*}
-m\text{ a \ensuremath{n} chiffres en base 10} & \Longleftrightarrow10^{n-1}\leq m<10^{n}\\
- & \Longleftrightarrow(n-1)\frac{\ln10}{\ln2}\leq\frac{\ln m}{\ln2}<n\frac{\ln10}{\ln2}
-\end{align*}
-
-\end_inset
-
-Donc
+ suivante 
 \begin_inset Formula 
 \[
-(n-1)\frac{\ln10}{\ln2}<q'<n\frac{\ln10}{\ln2}+1
+d\stackrel[n=0]{N}{\sum}q_{N-n}b^{n}+r_{N+1}=\stackrel[n=0]{N}{\sum}a_{N-n}b^{n}
 \]
 
 \end_inset
 
-Posons 
-\begin_inset Formula $e=\left|\frac{q'-q}{q}\right|$
+On sait que 
+\begin_inset Formula 
+\[
+\begin{cases}
+r_{0} & =0\\
+r_{n}b+a_{n} & =dq_{n}+r_{n+1}\,(*)
+\end{cases}
+\]
+
+\end_inset
+
+Donc pour 
+\begin_inset Formula $n=0$
+\end_inset
+
+ on a 
+\begin_inset Formula $dq_{0}+r_{1}=a_{0}$
+\end_inset
+
+, donc 
+\begin_inset Formula $P_{0}$
+\end_inset
+
+ est vraie.
+\begin_inset Newline newline
+\end_inset
+
+Supposons maintenant la propriété vraie jusqu'au rang 
+\begin_inset Formula $N\geq0$
+\end_inset
+
+ et montrons la au rang 
+\begin_inset Formula $N+1$
 \end_inset
 
 .
- Alors 
+\begin_inset Newline newline
+\end_inset
+
+On a 
 \begin_inset Formula 
 \begin{align*}
- & \left|1-\frac{n\frac{\ln10}{\ln2}-1}{8n}\right|<e<\left|1-\frac{(n-1)\frac{\ln10}{\ln2}}{8n}\right|\\
-\Longleftrightarrow & \left|1-\frac{\ln10}{8\ln2}+\frac{1}{8n}\right|<e<\left|1-\frac{\ln10}{8\ln2}+\frac{\ln10}{8n\ln2}\right|
+\stackrel[n=0]{N+1}{\sum}q_{N+1-n}b^{n} & =q_{N+1}b^{0}+\stackrel[n=1]{N+1}{\sum}q_{N+1-n}b^{n}\\
+ & =q_{N+1}b^{0}+b\sum_{n=0}^{N}q_{N-n}b^{n}
 \end{align*}
 
 \end_inset
 
-Donc à la limite on a
+ Alors
+\begin_inset Formula 
+\begin{align*}
+d\stackrel[n=0]{N+1}{\sum}q_{N+1-n}b^{n}+r_{N+2} & =dq_{N+1}b^{0}+db\stackrel[n=0]{N}{\sum}q_{N-n}b^{n}+r_{N+2}\\
+\text{par }(*) & =r_{N+1}b+a_{N+1}+db\stackrel[n=0]{N}{\sum}q_{N-n}b^{n}\\
+\text{par hypothèse de récurrence} & =b\stackrel[n=0]{N}{\sum}a_{N-n}b^{n}+a_{N+1}\\
+ & =\stackrel[n=0]{N}{\sum}a_{N-n}b^{n+1}+a_{N+1}\\
+ & =\stackrel[k=1]{N+1}{\sum}a_{N+1-k}b^{k}+a_{N+1}b^{0}\\
+ & =\stackrel[n=0]{N+1}{\sum}a_{N+1-n}b^{n}
+\end{align*}
+
+\end_inset
+
+ Donc 
+\begin_inset Formula $P_{N+1}$
+\end_inset
+
+ est vraie, donc la propriété est héréditaire.
+ Alors, pour tout 
+\begin_inset Formula $N\in\mathbb{N}$
+\end_inset
+
+ on a
 \begin_inset Formula 
 \[
-e=1-\frac{\ln10}{8\ln2}\approx0.5848
+d\stackrel[n=0]{N}{\sum}q_{N-n}b^{n}+r_{N+1}=\stackrel[n=0]{N}{\sum}a_{N-n}b^{n}
 \]
 
 \end_inset
 
-On voit alors que en stockant les chiffres de 
-\begin_inset Formula $m$
-\end_inset
 
- en base 
-\begin_inset Formula $10$
-\end_inset
-
- dans un tableau de byte, 
-\begin_inset Formula $58\%$
-\end_inset
-
- de la mémoire est utilisée inutilement par rapport à l'écriture binaire
- classique.
 \end_layout
 
 \end_body
