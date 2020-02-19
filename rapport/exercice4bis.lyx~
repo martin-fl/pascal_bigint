@@ -4,15 +4,10 @@
 \begin_header
 \save_transient_properties true
 \origin unavailable
-\textclass extarticle
+\textclass article
 \use_default_options true
-\begin_modules
-theorems-ams
-eqs-within-sections
-figs-within-sections
-\end_modules
 \maintain_unincluded_children false
-\language french
+\language english
 \language_package default
 \inputencoding auto
 \fontencoding global
@@ -33,10 +28,10 @@ figs-within-sections
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize 12
+\paperfontsize default
 \spacing single
 \use_hyperref false
-\papersize default
+\papersize a4paper
 \use_geometry false
 \use_package amsmath 1
 \use_package amssymb 1
@@ -68,10 +63,10 @@ figs-within-sections
 \paragraph_indentation default
 \is_math_indent 0
 \math_numbering_side default
-\quotes_style french
+\quotes_style english
 \dynamic_quotes 0
 \papercolumns 1
-\papersides 2
+\papersides 1
 \paperpagestyle default
 \tracking_changes false
 \output_changes false
@@ -86,8 +81,12 @@ figs-within-sections
 Exercice 4
 \end_layout
 
-\begin_layout Enumerate
-On cherche à montrer par récurrence sur N que 
+\begin_layout Standard
+Montrons par récurrence la propriété 
+\begin_inset Formula $P_{N}$
+\end_inset
+
+ suivante 
 \begin_inset Formula 
 \[
 d\stackrel[n=0]{N}{\sum}q_{N-n}b^{n}+r_{N+1}=\stackrel[n=0]{N}{\sum}a_{N-n}b^{n}
@@ -95,42 +94,7 @@ d\stackrel[n=0]{N}{\sum}q_{N-n}b^{n}+r_{N+1}=\stackrel[n=0]{N}{\sum}a_{N-n}b^{n}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Proof
-Soit la propriété 
-\begin_inset Formula $P\,:\,d\stackrel[n=0]{N}{\sum}q_{N-n}b^{n}+r_{N+1}=\stackrel[n=0]{N}{\sum}a_{N-n}b^{n}$
-\end_inset
-
-.
-\begin_inset Newline newline
-\end_inset
-
-
-\end_layout
-
-\begin_layout Proof
-On l'initialise à 
-\begin_inset Formula $N=0$
-\end_inset
-
- :
-\begin_inset Newline newline
-\end_inset
-
-On obtient : 
-\begin_inset Formula 
-\[
-\begin{cases}
-dq_{0}+r_{1} & pour\,le\,membre\,de\,gauche\\
-a_{0} & pour\,le\,membre\,de\,droite
-\end{cases}
-\]
-
-\end_inset
-
- or on a 
+On sait que 
 \begin_inset Formula 
 \[
 \begin{cases}
@@ -141,19 +105,15 @@ r_{n}b+a_{n} & =dq_{n}+r_{n+1}\,(*)
 
 \end_inset
 
- d'où, en remplaçant 
-\begin_inset Formula $n$
+Donc pour 
+\begin_inset Formula $n=0$
 \end_inset
 
- par 0, 
+ on a 
 \begin_inset Formula $dq_{0}+r_{1}=a_{0}$
 \end_inset
 
-.
-\begin_inset Newline newline
-\end_inset
-
-Ainsi 
+, donc 
 \begin_inset Formula $P_{0}$
 \end_inset
 
@@ -161,11 +121,7 @@ Ainsi
 \begin_inset Newline newline
 \end_inset
 
-
-\end_layout
-
-\begin_layout Proof
-Supposons la propriété vraie jusqu'au rang 
+Supposons maintenant la propriété vraie jusqu'au rang 
 \begin_inset Formula $N\geq0$
 \end_inset
 
@@ -177,48 +133,46 @@ Supposons la propriété vraie jusqu'au rang
 \begin_inset Newline newline
 \end_inset
 
-Remarque : 
+On a 
 \begin_inset Formula 
-\[
-\begin{cases}
-\stackrel[n=0]{N+1}{\sum}q_{N+1-n}b^{n} & =q_{N+1}b^{0}+q_{N}b^{1}+\text{…}+q_{1}b^{N}+q_{0}b^{N+1}\\
-\stackrel[n=0]{N}{\sum}q_{N-n}b^{n} & =q_{N}b^{0}+q_{N-1}b^{1}+\text{…}+q_{1}b^{N-1}+q_{0}b^{N}
-\end{cases}
-\]
+\begin{align*}
+\stackrel[n=0]{N+1}{\sum}q_{N+1-n}b^{n} & =q_{N+1}b^{0}+\stackrel[n=1]{N+1}{\sum}q_{N+1-n}b^{n}\\
+ & =q_{N+1}b^{0}+b\sum_{n=0}^{N}q_{N-n}b^{n}
+\end{align*}
 
 \end_inset
 
- donc 
-\begin_inset Formula 
-\[
-\stackrel[n=0]{N+1}{\sum}q_{N+1-n}b^{n}=q_{N+1}b^{0}+b\stackrel[n=0]{N}{\sum}q_{N-n}b^{n}
-\]
-
-\end_inset
-
-Ainsi, 
+ Alors
 \begin_inset Formula 
 \begin{align*}
 d\stackrel[n=0]{N+1}{\sum}q_{N+1-n}b^{n}+r_{N+2} & =dq_{N+1}b^{0}+db\stackrel[n=0]{N}{\sum}q_{N-n}b^{n}+r_{N+2}\\
- & \underset{par\,(*)}{\underbrace{=}}r_{N+1}b+a_{N+1}+db\stackrel[n=0]{N}{\sum}q_{N-n}b^{n}\\
- & =b(d\stackrel[n=0]{N}{\sum}q_{N-n}b^{n}+r_{N+1})+a_{N+1}\\
- & \underset{par\,hypothèse\,de\,récurrence}{\underbrace{=}}b\stackrel[n=0]{N}{\sum}a_{N-n}b^{n}+a_{N+1}\\
+\text{par }(*) & =r_{N+1}b+a_{N+1}+db\stackrel[n=0]{N}{\sum}q_{N-n}b^{n}\\
+\text{par hypothèse de récurrence} & =b\stackrel[n=0]{N}{\sum}a_{N-n}b^{n}+a_{N+1}\\
  & =\stackrel[n=0]{N}{\sum}a_{N-n}b^{n+1}+a_{N+1}\\
- & \underset{k=n+1}{\underbrace{=}}\stackrel[k=1]{N+1}{\sum}a_{N+1-k}b^{k}+\underset{=a_{N+1-0}b^{0}}{\underbrace{a_{N+1}}}\\
+ & =\stackrel[k=1]{N+1}{\sum}a_{N+1-k}b^{k}+a_{N+1}b^{0}\\
  & =\stackrel[n=0]{N+1}{\sum}a_{N+1-n}b^{n}
 \end{align*}
 
 \end_inset
 
-Donc 
+ Donc 
 \begin_inset Formula $P_{N+1}$
 \end_inset
 
- est vraie donc 
-\begin_inset Formula $P$
+ est vraie, donc la propriété est héréditaire.
+ Alors, pour tout 
+\begin_inset Formula $N\in\mathbb{N}$
 \end_inset
 
- est vérifiée.
+ on a
+\begin_inset Formula 
+\[
+d\stackrel[n=0]{N}{\sum}q_{N-n}b^{n}+r_{N+1}=\stackrel[n=0]{N}{\sum}a_{N-n}b^{n}
+\]
+
+\end_inset
+
+
 \end_layout
 
 \end_body
