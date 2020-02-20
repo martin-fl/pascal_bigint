@@ -40,7 +40,7 @@ end;
 /// writeln (smaller (a, b));
 /// ```
 function smaller (a, b: int_array) : Boolean;
-var i: LongInt;
+var i: LongWord;
 begin
 	normalize (a); normalize (b);
 	smaller := False;
@@ -60,7 +60,7 @@ end;
 
 /// Réalise la somme de deux int_array
 procedure sum(a, b: int_array; var s: int_array);
-var i: LongInt;
+var i: LongWord;
 	somme: QWord;
 	retenue: LongWord;
 	max, min: int_array;
@@ -81,15 +81,17 @@ begin
 	setLength (s, length(max) + 1);
 	s := copy (max, 0, length (max));
 
+	retenue := 0;
+
 	// On stocke temporairement le résultat de la somme
 	// dans un QWord en cas de dépassement, pour pouvoir
 	// calculer la retenue dans tous les cas et la propager.
 	for i:=0 to high (min) do
 	begin
-		somme := s[i] + min[i];				
+		somme := s[i] + min[i] + retenue;				
 		retenue := somme div BASE;
-		s[i] := somme mod BASE;
-		s[i+1] := s[i+1] + retenue;
+		// Note: ici l'expression est équivalente à s[i] := somme mod BASE.
+		s[i] := somme;
 	end;
 
 	Normalize (s);
@@ -98,36 +100,33 @@ end;
 /// Réalise la soustraction de deux int_array
 /// Note: ici on impose a >= b;
 procedure diff (a, b: int_array; var s: int_array);
-var i: LongInt;
-	diffs: array of LongInt;
-	retenue: LongInt;
+var i: LongWord;
+	difference: Int64;
+	retenue: Int64;
 begin
 	assert (not (smaller (a, b)));
 	Normalize (a); Normalize (b);
 	
-	setLength (diffs, length (a));
+	setLength (s, length (a));
 
-	for i:=0 to high (a) do
-		if i <= high (b) then
-			diffs[i] := a[i] - b[i]
-		else 
-			diffs[i] := a[i];
-
-	setLength (s, length(diffs));
-
-	for i:=0 to high (diffs) do
+	retenue := 0;
+	for i:=0 to High (s) do
 	begin
-		if diffs[i] < 0 then
-		begin
-			// En Pascal, le reste peut être négatif.
-			// Si on ne veut pas qu'il le soit, il faut lui ajouter
-			// la base et retirer 1 au quotient.
-			retenue := (diffs[i] div BASE) - 1;
-			diffs[i] := (diffs[i] mod BASE) + BASE; 
-			diffs[i+1] := diffs[i+1] + retenue;
-		end;
+		// On utilise un Int64 dans le cas où la différence est négative
+		// pour pouvoir calculer la retenue
+		if i <= High (b) then
+			difference := a[i] + retenue - b[i]
+		else
+			difference := a[i] + retenue;
 
-		s[i] := diffs[i];
+		retenue := 0;
+		// En Pascal, le reste peut être négatif.
+		// Si on ne veut pas qu'il le soit, il faut lui ajouter
+		// la base et retirer 1 au quotient.
+		if difference < 0 then 
+			retenue := (difference div BASE) - 1;
+		// Note: ici l'expression est équivalente à s[i] := difference mod BASE.
+		s[i] := difference;
 	end;
 
 	Normalize (s)
