@@ -1,0 +1,54 @@
+%% LyX 2.3.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[a4paper,english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amsmath}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\pdfpageheight\paperheight
+\pdfpagewidth\paperwidth
+
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+
+\section*{Exercice 1}
+
+Soit $m$ un entier de $n$ chiffres en base 10. En stockant les chiffres
+de $m$ en base $10$ dans un tableau de byte, le nombre de bits utilisés
+est $q=8n$, car chaque ``case'' du tableau utilise $8$ bits. Calculons
+le nombre $q'$ de bits utilisés si nous pouvions stocker l'écriture
+binaire de $m$ dans la mémoire :
+
+\begin{align*}
+m\text{ utilises }q'\text{ bits} & \Longleftrightarrow2^{q'-1}\leq m<2^{q'}\\
+ & \Longleftrightarrow q'-1\leq\frac{\ln m}{\ln2}<q'\\
+ & \Longleftrightarrow\frac{\ln m}{\ln2}<q'\leq\frac{\ln m}{\ln2}+1
+\end{align*}
+De plus 
+\begin{align*}
+m\text{ a \ensuremath{n} chiffres en base 10} & \Longleftrightarrow10^{n-1}\leq m<10^{n}\\
+ & \Longleftrightarrow(n-1)\frac{\ln10}{\ln2}\leq\frac{\ln m}{\ln2}<n\frac{\ln10}{\ln2}
+\end{align*}
+Donc
+\[
+(n-1)\frac{\ln10}{\ln2}<q'<n\frac{\ln10}{\ln2}+1
+\]
+Posons $e=\left|\frac{q'-q}{q}\right|$. Alors 
+\begin{align*}
+ & \left|1-\frac{n\frac{\ln10}{\ln2}-1}{8n}\right|<e<\left|1-\frac{(n-1)\frac{\ln10}{\ln2}}{8n}\right|\\
+\Longleftrightarrow & \left|1-\frac{\ln10}{8\ln2}+\frac{1}{8n}\right|<e<\left|1-\frac{\ln10}{8\ln2}+\frac{\ln10}{8n\ln2}\right|
+\end{align*}
+Donc à la limite on a
+\[
+e=1-\frac{\ln10}{8\ln2}\approx0.5848
+\]
+On voit alors que en stockant les chiffres de $m$ en base $10$ dans
+un tableau de byte, $58\%$ de la mémoire est utilisée inutilement
+par rapport à l'écriture binaire classique.
+\end{document}

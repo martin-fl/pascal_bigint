@@ -12,6 +12,6 @@ begin
   //b := int_array.create (25, 11);
 
   prod (a, b, mul);
-  write_digits(mul)
+  write_digits(mul);
 end.
 

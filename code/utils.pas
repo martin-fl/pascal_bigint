@@ -44,8 +44,8 @@ end;
 procedure normalize (var t : int_array);
 begin
 	// On doit vérifier que t <> nil en premier
-	// car si t = nil, alors length (t) n'existe pas
-	// et le programme s'arrête.
+	// car si t = nil, alors length (t) - 1 = -1
+	// et on n'accède à de la mémoire non allouéew
     while (t <> nil) and (t[length(t) - 1] = 0)do
         SetLength (t, length(t) - 1);
 end;
@@ -144,6 +144,7 @@ begin
 	Normalize (s);
 end;
 
+// retenue_ld = retenue longue durée
 procedure prod (a, b : int_array; var p : int_array);
 var n, m: Longword;
 	produit: QWord;
