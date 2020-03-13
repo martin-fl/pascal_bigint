@@ -2,16 +2,12 @@ program main;
 
 uses utils;
 
-var a, b, add, sub, mul, mul_d: int_array;
-    i: shortint;
+var N:int_array;
+  i:longword;
 begin
-  a := int_array.create (1 shl 31 + 4, 4, 0, 0, 3 + 1 shl 20);
-  b := int_array.create (1 shl 30, 9, 2 + 1 shl 25, 0);
+  N:=int_array.create(51);
+  for i:=0 to 2019 do
+    prod(N, N, N);
   
-  //a := int_array.create (50, 20);
-  //b := int_array.create (25, 11);
-
-  prod (a, b, mul);
-  write_digits(mul);
 end.
 

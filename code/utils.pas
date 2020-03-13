@@ -17,8 +17,9 @@ function smaller (a, b: int_array) : Boolean;
 
 procedure sum(a, b: int_array; var s: int_array);
 procedure diff (a, b: int_array; var s: int_array);
-
 procedure prod (a, b : int_array; var p : int_array);
+
+procedure div_by_digit (a : int_array; d : longword; var q : int_array; var r : longword);
 
 implementation
 
@@ -184,5 +185,23 @@ begin
 
 	Normalize (p);
 end;
+
+procedure div_by_digit (a : int_array; d : longword; var q : int_array; var r : longword);
+
+var i, N : LongWord;
+
+begin
+	Normalize (a);
+	setLength (q, length (a));
+	r := 0;
+	N := length (a) - 1;
+	for i := N downto 0 do
+		begin
+			q[i] := (r * BASE + a[i]) div d;
+			r := (r * BASE + a[i]) mod d;
+		end;
+	Normalize (q);
+end;
+
 end.
 
