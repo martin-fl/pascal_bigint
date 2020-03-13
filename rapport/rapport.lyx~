@@ -5,6 +5,12 @@
 \save_transient_properties true
 \origin unavailable
 \textclass extarticle
+\begin_preamble
+\usepackage{xcolor}
+
+\definecolor{outerspace}{rgb}{0.25, 0.29, 0.3}
+\definecolor{darkraspberry}{rgb}{0.53, 0.15, 0.34}
+\end_preamble
 \use_default_options true
 \begin_modules
 customHeadersFooters
@@ -40,7 +46,7 @@ customHeadersFooters
 \pdf_bookmarksopenlevel 1
 \pdf_breaklinks false
 \pdf_pdfborder true
-\pdf_colorlinks true
+\pdf_colorlinks false
 \pdf_backref false
 \pdf_pdfusetitle true
 \papersize a4paper
@@ -64,7 +70,7 @@ customHeadersFooters
 \suppress_date true
 \justification true
 \use_refstyle 1
-\use_minted 0
+\use_minted 1
 \index Index
 \shortcut idx
 \color #008000
@@ -79,7 +85,8 @@ customHeadersFooters
 \dynamic_quotes 0
 \papercolumns 1
 \papersides 1
-\paperpagestyle default
+\paperpagestyle fancy
+\listings_params "language=Pascal,bgcolor=black,style=fruity,fontsize={\small}"
 \tracking_changes false
 \output_changes false
 \html_math_output 0
@@ -95,6 +102,10 @@ Rapport de MAO:
 \end_inset
 
 Arithmétique Multiprécision
+\end_layout
+
+\begin_layout Author
+Martin FLEURIAL, Célia ROCHE
 \end_layout
 
 \begin_layout Abstract
@@ -155,7 +166,7 @@ pagenumbering{arabic}
 Représentation des données en mémoire
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsection*
 Exercice 1
 \end_layout
 
@@ -395,6 +406,185 @@ Normalisation et comparaison
 Exercice 3
 \end_layout
 
+\begin_layout Enumerate
+\begin_inset listings
+lstparams "language=Pascal,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+procedure normalize (var t : int_array);
+\end_layout
+
+\begin_layout Plain Layout
+
+begin
+\end_layout
+
+\begin_layout Plain Layout
+
+while (t <> nil) and (t[length (t) - 1] = 0) do
+\end_layout
+
+\begin_layout Plain Layout
+
+	SetLength (t, length (t) - 1);
+\end_layout
+
+\begin_layout Plain Layout
+
+end;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Il est nécessaire de passer 
+\begin_inset Formula $t$
+\end_inset
+
+ en entrée/sortie à la fonction pour que la procédure ne duplique pas l'espace
+ mémoire occupé par 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ En effet, en passant un paramètre en entrée, le langage copie la mémoire
+ occupée par 
+\begin_inset Formula $t$
+\end_inset
+
+ à un autre endroit et fait les opérations sur cette mémoire ci.
+ Cependant, ici nous manipulons des tableaux de tailles arbitraires, et
+ donc qui occupent beaucoup d'espace mémoire.
+ En passant 
+\begin_inset Formula $t$
+\end_inset
+
+ en entrée/sortie, le langage procède à un passage par adresse (ou par référence
+) de 
+\begin_inset Formula $t$
+\end_inset
+
+, c'est à dire qu'elle manipule un pointeur, ce qui est beaucoup moins coûteux
+ que de dupliquer la mémoire.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset listings
+lstparams "language=Pascal,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function smaller (a, b: int_array) : Boolean;
+\end_layout
+
+\begin_layout Plain Layout
+
+var i: LongWord;
+\end_layout
+
+\begin_layout Plain Layout
+
+begin
+\end_layout
+
+\begin_layout Plain Layout
+
+    normalize (a); normalize (b);
+\end_layout
+
+\begin_layout Plain Layout
+
+    smaller := False;
+\end_layout
+
+\begin_layout Plain Layout
+
+	if (length (a) < length (b)) then
+\end_layout
+
+\begin_layout Plain Layout
+
+		smaller := True
+\end_layout
+
+\begin_layout Plain Layout
+
+	else if (length (a) = length (b)) then
+\end_layout
+
+\begin_layout Plain Layout
+
+	begin 		
+\end_layout
+
+\begin_layout Plain Layout
+
+		i := length (a) - 1;
+\end_layout
+
+\begin_layout Plain Layout
+
+		// On compare jusqu'à trouver
+\end_layout
+
+\begin_layout Plain Layout
+
+		// des chiffres différents 
+\end_layout
+
+\begin_layout Plain Layout
+
+		while (a[i]=b[i]) and (i>0) do
+\end_layout
+
+\begin_layout Plain Layout
+
+			i := i - 1;
+\end_layout
+
+\begin_layout Plain Layout
+
+		// On compare les chiffres
+\end_layout
+
+\begin_layout Plain Layout
+
+		// différents et on conclut 
+\end_layout
+
+\begin_layout Plain Layout
+
+		if (a[i]<=b[i]) then
+\end_layout
+
+\begin_layout Plain Layout
+
+			smaller := True
+\end_layout
+
+\begin_layout Plain Layout
+
+	end; 
+\end_layout
+
+\begin_layout Plain Layout
+
+end;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Quotient d’un int_array par un longword et conversion décimale
 \end_layout
@@ -403,7 +593,7 @@ Quotient d’un int_array par un longword et conversion décimale
 Exercice 4
 \end_layout
 
-\begin_layout Standard
+\begin_layout Enumerate
 Montrons par récurrence la propriété 
 \begin_inset Formula $P_{N}$
 \end_inset
@@ -498,6 +688,92 @@ d\stackrel[n=0]{N}{\sum}q_{N-n}b^{n}+r_{N+1}=\stackrel[n=0]{N}{\sum}a_{N-n}b^{n}
 
 \end_layout
 
+\begin_layout Enumerate
+\begin_inset listings
+lstparams "language=Pascal,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+procedure div_by_digit (a : int_array; d : longword;
+\end_layout
+
+\begin_layout Plain Layout
+
+						var q : int_array; var r : longword);
+\end_layout
+
+\begin_layout Plain Layout
+
+var i, N : LongWord;
+\end_layout
+
+\begin_layout Plain Layout
+
+begin
+\end_layout
+
+\begin_layout Plain Layout
+
+	Normalize (a);
+\end_layout
+
+\begin_layout Plain Layout
+
+	setLength (q, length (a));
+\end_layout
+
+\begin_layout Plain Layout
+
+	r := 0;
+\end_layout
+
+\begin_layout Plain Layout
+
+	N := length (a) - 1;
+\end_layout
+
+\begin_layout Plain Layout
+
+	for i := N downto 0 do
+\end_layout
+
+\begin_layout Plain Layout
+
+		begin
+\end_layout
+
+\begin_layout Plain Layout
+
+			q[i] := (r * BASE + a[i]) div d;
+\end_layout
+
+\begin_layout Plain Layout
+
+			r := (r * BASE + a[i]) mod d;
+\end_layout
+
+\begin_layout Plain Layout
+
+		end;
+\end_layout
+
+\begin_layout Plain Layout
+
+	Normalize (q);
+\end_layout
+
+\begin_layout Plain Layout
+
+end;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Somme et différence de deux int_array
 \end_layout
@@ -506,12 +782,637 @@ Somme et différence de deux int_array
 Exercice 5
 \end_layout
 
+\begin_layout Standard
+Pour réaliser la somme de deux int_array, il faut réaliser l'addition avec
+ retenue.
+ C'est à dire additionner terme à terme (chiffre à chiffre) les int_array,
+ et lorsque la somme est plus grande que la base (ici 
+\begin_inset Formula $2^{32}$
+\end_inset
+
+), on ajoute la retenue au chiffre suivant.
+\end_layout
+
+\begin_layout Standard
+Exemple:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+325+28 & =\left[5;2;3\right]+\left[8;2\right]\\
+\text{(a)} & =\left[13;4;3\right]\\
+\text{(b)} & =\left[3;5;3\right]
+\end{align*}
+
+\end_inset
+
+On voit à l'étape que la valeur de la retenue est le quotient de la division
+ euclidienne de la somme par la base, et que on remplace la somme par le
+ reste.
+ On peut généraliser cela :
+\end_layout
+
+\begin_layout Standard
+Soient 
+\begin_inset Formula $m_{1}=\sum_{n=0}^{N_{1}}c_{n}b^{n}$
+\end_inset
+
+ et 
+\begin_inset Formula $m_{2}=\sum_{n=0}^{N_{2}}c_{n}'b^{n}$
+\end_inset
+
+ avec 
+\begin_inset Formula $m_{1}\geqslant m_{2}$
+\end_inset
+
+.
+ Alors on pose 
+\begin_inset Formula $N_{3}=\max(N_{1};N_{2})=N_{1}$
+\end_inset
+
+ et on définit 
+\begin_inset Formula $\tilde{c}_{n}$
+\end_inset
+
+ ainsi :
+\begin_inset Formula 
+\[
+\begin{cases}
+c_{0}+c'_{0}=r_{0}b+\tilde{c}_{0} & \text{si }n=0\\
+c_{n}+c'_{n}+r_{n-1}=r_{n}b+\tilde{c}_{n} & \text{si }1\leqslant n\leqslant N_{2}\\
+c_{n}+r_{n-1}=r_{n}b+\tilde{c}_{n} & \text{si }N_{2}\leqslant n\leqslant N_{1}
+\end{cases}
+\]
+
+\end_inset
+
+ où les 
+\begin_inset Formula $r_{n}\geqslant0$
+\end_inset
+
+ et 
+\begin_inset Formula $\tilde{c}_{n}\in\{0,\dots,b-1$
+\end_inset
+
+}.
+ Alors 
+\begin_inset Formula $m_{1}+m_{2}=\sum_{n=0}^{N_{3}+1}\tilde{c}_{n}b^{n}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Pascal,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+procedure sum (a, b: int_array; var s: int_array);
+\end_layout
+
+\begin_layout Plain Layout
+
+var i: LongWord;
+\end_layout
+
+\begin_layout Plain Layout
+
+	somme: QWord;
+\end_layout
+
+\begin_layout Plain Layout
+
+	retenue: LongWord;
+\end_layout
+
+\begin_layout Plain Layout
+
+begin
+\end_layout
+
+\begin_layout Plain Layout
+
+	Normalize (a); Normalize (b);
+\end_layout
+
+\begin_layout Plain Layout
+
+	if smaller (a, b) then
+\end_layout
+
+\begin_layout Plain Layout
+
+		sum (b, a, s)
+\end_layout
+
+\begin_layout Plain Layout
+
+	else
+\end_layout
+
+\begin_layout Plain Layout
+
+ 	begin
+\end_layout
+
+\begin_layout Plain Layout
+
+		setLength (s, length (a) + 1);
+\end_layout
+
+\begin_layout Plain Layout
+
+		retenue := 0;
+\end_layout
+
+\begin_layout Plain Layout
+
+		for i:=0 to high (s) do
+\end_layout
+
+\begin_layout Plain Layout
+
+		begin
+\end_layout
+
+\begin_layout Plain Layout
+
+			// On utilise un QWord dans 
+\end_layout
+
+\begin_layout Plain Layout
+
+			// le cas où la somme est plus
+\end_layout
+
+\begin_layout Plain Layout
+
+			// grande que la base pour 
+\end_layout
+
+\begin_layout Plain Layout
+
+			// pouvoir calculer la retenue
+\end_layout
+
+\begin_layout Plain Layout
+
+			if i <= High (b) then
+\end_layout
+
+\begin_layout Plain Layout
+
+				somme := a[i] + retenue + b[i]
+\end_layout
+
+\begin_layout Plain Layout
+
+			else 				
+\end_layout
+
+\begin_layout Plain Layout
+
+				somme := a[i] + retenue;
+\end_layout
+
+\begin_layout Plain Layout
+
+			retenue := 0;
+\end_layout
+
+\begin_layout Plain Layout
+
+			if somme >= BASE then
+\end_layout
+
+\begin_layout Plain Layout
+
+ 				retenue := somme div BASE;
+\end_layout
+
+\begin_layout Plain Layout
+
+			s[i] := somme mod BASE;
+\end_layout
+
+\begin_layout Plain Layout
+
+		end;
+\end_layout
+
+\begin_layout Plain Layout
+
+		Normalize (s);
+\end_layout
+
+\begin_layout Plain Layout
+
+	end;
+\end_layout
+
+\begin_layout Plain Layout
+
+end;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+De la même manière pour la différence, on peut généraliser l'algorithme
+ .
+ En reprenant les notations précédentes :
+\begin_inset Formula 
+\[
+\begin{cases}
+c_{0}-c'_{0}=r_{0}b+\tilde{c}_{0} & \text{si }n=0\\
+c_{n}-c'_{n}+r_{n-1}=r_{n}b+\tilde{c}_{n} & \text{si }1\leqslant n\leqslant N_{2}\\
+c_{n}+r_{n-1}=r_{n}b+\tilde{c}_{n} & \text{si }N_{2}\leqslant n\leqslant N_{1}
+\end{cases}
+\]
+
+\end_inset
+
+où les 
+\begin_inset Formula $r_{n}\leqslant0$
+\end_inset
+
+ et 
+\begin_inset Formula $\tilde{c}_{n}\in\{0,\dots,b-1\}$
+\end_inset
+
+ et alors 
+\begin_inset Formula $m_{1}-m_{2}=\sum_{n=0}^{N_{3}}\tilde{c}_{n}b^{n}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Pascal,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+procedure diff (a, b: int_array; var s: int_array);
+\end_layout
+
+\begin_layout Plain Layout
+
+var i: LongWord;
+\end_layout
+
+\begin_layout Plain Layout
+
+	difference, retenue: Int64;
+\end_layout
+
+\begin_layout Plain Layout
+
+begin
+\end_layout
+
+\begin_layout Plain Layout
+
+	Normalize (a); Normalize (b); 
+\end_layout
+
+\begin_layout Plain Layout
+
+	setLength (s, length (a));
+\end_layout
+
+\begin_layout Plain Layout
+
+	retenue := 0;
+\end_layout
+
+\begin_layout Plain Layout
+
+	for i:=0 to High (s) do
+\end_layout
+
+\begin_layout Plain Layout
+
+	begin
+\end_layout
+
+\begin_layout Plain Layout
+
+		// On utilise un Int64 dans le cas
+\end_layout
+
+\begin_layout Plain Layout
+
+		// où la différence est négative pour
+\end_layout
+
+\begin_layout Plain Layout
+
+		// pouvoir calculer la retenue
+\end_layout
+
+\begin_layout Plain Layout
+
+		if i <= High (b) then
+\end_layout
+
+\begin_layout Plain Layout
+
+			difference := a[i] + retenue - b[i]
+\end_layout
+
+\begin_layout Plain Layout
+
+		else
+\end_layout
+
+\begin_layout Plain Layout
+
+			difference := a[i] + retenue;
+\end_layout
+
+\begin_layout Plain Layout
+
+		retenue := 0;
+\end_layout
+
+\begin_layout Plain Layout
+
+		// En Pascal, le reste peut être négatif.
+\end_layout
+
+\begin_layout Plain Layout
+
+		// Si on ne veut pas qu'il le soit,
+\end_layout
+
+\begin_layout Plain Layout
+
+		// il faut lui ajouter
+\end_layout
+
+\begin_layout Plain Layout
+
+		// la base et retirer 1 au quotient.
+\end_layout
+
+\begin_layout Plain Layout
+
+		if difference < 0 then
+\end_layout
+
+\begin_layout Plain Layout
+
+ 			retenue := (difference div BASE) - 1;
+\end_layout
+
+\begin_layout Plain Layout
+
+		s[i] := difference mod BASE;
+\end_layout
+
+\begin_layout Plain Layout
+
+	end;
+\end_layout
+
+\begin_layout Plain Layout
+
+	Normalize (s);
+\end_layout
+
+\begin_layout Plain Layout
+
+end;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Produit naïf de deux int_array
 \end_layout
 
 \begin_layout Subsection
 Exercice 6
+\end_layout
+
+\begin_layout Standard
+Pour réaliser le produit de deux int_array, on applique l'algorithme décrit
+ dans l'exercice 2, en utilisant la base 
+\begin_inset Formula $2^{32}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Pascal,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+procedure prod (a, b : int_array; var p : int_array);
+\end_layout
+
+\begin_layout Plain Layout
+
+var n, m: Longword;
+\end_layout
+
+\begin_layout Plain Layout
+
+	produit: QWord;
+\end_layout
+
+\begin_layout Plain Layout
+
+	retenue, retenue_ld, bs_atteinte: LongWord;
+\end_layout
+
+\begin_layout Plain Layout
+
+begin
+\end_layout
+
+\begin_layout Plain Layout
+
+	Normalize (a); Normalize (b);
+\end_layout
+
+\begin_layout Plain Layout
+
+	setLength (p, length (a) + length (b) + 1);
+\end_layout
+
+\begin_layout Plain Layout
+
+	// La somme n+m n'est pas croissante
+\end_layout
+
+\begin_layout Plain Layout
+
+	// dans la boucle ci-dessous, donc il
+\end_layout
+
+\begin_layout Plain Layout
+
+	// faut conserver la retenue quand on retourne sur une
+\end_layout
+
+\begin_layout Plain Layout
+
+	// valeur inférieure de n+m, et l'ajouter
+\end_layout
+
+\begin_layout Plain Layout
+
+	// quand atteint n+m+1.
+ De plus, quand on 
+\end_layout
+
+\begin_layout Plain Layout
+
+	// atteint high (a) + high (b) il faut déplacer
+\end_layout
+
+\begin_layout Plain Layout
+
+	// la retenue à high (a) + high(b) + 1
+\end_layout
+
+\begin_layout Plain Layout
+
+	retenue_ld := 0;
+\end_layout
+
+\begin_layout Plain Layout
+
+	bs_atteinte := 0;
+\end_layout
+
+\begin_layout Plain Layout
+
+	for n:=0 to high (a) do
+\end_layout
+
+\begin_layout Plain Layout
+
+	begin
+\end_layout
+
+\begin_layout Plain Layout
+
+		retenue := 0;
+\end_layout
+
+\begin_layout Plain Layout
+
+		for m:=0 to high (b) do
+\end_layout
+
+\begin_layout Plain Layout
+
+		begin
+\end_layout
+
+\begin_layout Plain Layout
+
+			produit := a[n]*b[m] + retenue;
+\end_layout
+
+\begin_layout Plain Layout
+
+			if (n + m = bs_atteinte + 1) then
+\end_layout
+
+\begin_layout Plain Layout
+
+				produit := produit + retenue_ld;
+\end_layout
+
+\begin_layout Plain Layout
+
+			retenue := produit div BASE;
+\end_layout
+
+\begin_layout Plain Layout
+
+			p[n+m] := (p[n+m] + produit) mod BASE;
+\end_layout
+
+\begin_layout Plain Layout
+
+			if m = high (b) then
+\end_layout
+
+\begin_layout Plain Layout
+
+			begin
+\end_layout
+
+\begin_layout Plain Layout
+
+			    retenue_ld := retenue;
+\end_layout
+
+\begin_layout Plain Layout
+
+				bs_atteinte := n + m;
+\end_layout
+
+\begin_layout Plain Layout
+
+ 			end;
+\end_layout
+
+\begin_layout Plain Layout
+
+			if (n = high (a)) and (m = high (b)) then
+\end_layout
+
+\begin_layout Plain Layout
+
+				p[n+m+1] := retenue;
+\end_layout
+
+\begin_layout Plain Layout
+
+		end;
+\end_layout
+
+\begin_layout Plain Layout
+
+	end;
+\end_layout
+
+\begin_layout Plain Layout
+
+	Normalize (p);
+\end_layout
+
+\begin_layout Plain Layout
+
+end;
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
