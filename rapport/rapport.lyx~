@@ -97,11 +97,11 @@ customHeadersFooters
 \begin_body
 
 \begin_layout Title
-Rapport de MAO:
+Arithmétique Multiprécision
 \begin_inset Newline newline
 \end_inset
 
-Arithmétique Multiprécision
+Projet de MAO 
 \end_layout
 
 \begin_layout Author
@@ -109,8 +109,7 @@ Martin FLEURIAL, Célia ROCHE
 \end_layout
 
 \begin_layout Abstract
-Dans ce rapport blablabla arithmétique blabla opérations blabla retenue
- blabla
+Dans ce rapport, nous
 \end_layout
 
 \begin_layout Standard
@@ -119,36 +118,39 @@ status open
 
 \begin_layout Plain Layout
 
-%pour que la numération des pages commence à la page après
-\end_layout
-
-\begin_layout Plain Layout
-
 
 \backslash
 pagenumbering{gobble}
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
 
 
-\backslash
-clearpage
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
 
 
-\backslash
-tableofcontents
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
 
 
-\backslash
-clearpage
 \end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\begin_inset ERT
+status open
 
 \begin_layout Plain Layout
 
@@ -247,6 +249,14 @@ Posons
 \begin_inset Formula $e=\left|\frac{q'-q}{q}\right|$
 \end_inset
 
+ l'écart entre 
+\begin_inset Formula $q$
+\end_inset
+
+ et 
+\begin_inset Formula $q'$
+\end_inset
+
 .
  Alors 
 \begin_inset Formula 
@@ -281,11 +291,15 @@ On voit alors que en stockant les chiffres de
  classique.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsection*
 Exercice 2
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Subsubsection*
+Question 1
+\end_layout
+
+\begin_layout Standard
 Procédons à la multiplication de 
 \begin_inset Formula $325$
 \end_inset
@@ -298,20 +312,16 @@ Procédons à la multiplication de
 \begin_inset Formula $10$
 \end_inset
 
- :
-\begin_inset Newline newline
-\end_inset
-
-Supposons ces entiers écrits sous forme de 2 tableaux contenant respectivement
- 3 et 2 chiffres, on a alors 
+ : supposons ces entiers écrits sous forme de 2 tableaux contenant respectivemen
+t 3 et 2 chiffres, on a alors 
 \begin_inset Formula 
 \begin{align*}
 325\times28 & =\left[5;2;3\right]\times\left[8;2\right]\\
-\text{(a)} & =10^{0}\times8\times\left[5;2;3\right]+10^{1}\times2\times\left[5;2;3\right]\\
-\text{(\text{b})} & =\left[40;16;24\right]+\left[100;40;60\right]\\
-\text{(\text{c})} & =\left[0;0;6;2\right]+\left[0;0;5;6\right]\\
-\text{(\text{d})} & =\left[0;0;11;8\right]\\
-\text{(\text{e})} & =\left[0;0;1;9\right]\\
+\text{(1)} & =10^{0}\times8\times\left[5;2;3\right]+10^{1}\times2\times\left[5;2;3\right]\\
+\text{(2)} & =\left[40;16;24\right]+\left[100;40;60\right]\\
+\text{(3)} & =\left[0;0;6;2\right]+\left[0;0;5;6\right]\\
+\text{(4)} & =\left[0;0;11;8\right]\\
+\text{(5)} & =\left[0;0;1;9\right]\\
  & =9100
 \end{align*}
 
@@ -320,7 +330,6 @@ Supposons ces entiers écrits sous forme de 2 tableaux contenant respectivement
 
 \end_layout
 
-\begin_deeper
 \begin_layout Enumerate
 On distribue 
 \begin_inset Formula $28$
@@ -357,12 +366,15 @@ On ajoute les tableaux terme à terme
 \end_layout
 
 \begin_layout Enumerate
-On répète (c) sur le tableau obtenu
+On répète (3) sur le tableau obtenu
 \end_layout
 
-\end_deeper
-\begin_layout Enumerate
-On constate à l'étape (b) que les nombres contenus dans les cases des tableaux
+\begin_layout Subsubsection*
+Question 2
+\end_layout
+
+\begin_layout Standard
+On constate à l'étape (2) que les nombres contenus dans les cases des tableaux
  ne sont pas dans 
 \begin_inset Formula $\left\{ 0;\dots;10-1\right\} .$
 \end_inset
@@ -402,11 +414,27 @@ On constate à l'étape (b) que les nombres contenus dans les cases des tableaux
 Normalisation et comparaison
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsection*
 Exercice 3
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Subsubsection*
+Question 1
+\end_layout
+
+\begin_layout Standard
+Pour normaliser un int_array 
+\begin_inset Formula $t$
+\end_inset
+
+, il suffit de retirer son dernier chiffre tant qu'il est égal à 
+\begin_inset Formula $0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 \begin_inset listings
 lstparams "language=Pascal,tabsize=4"
 inline false
@@ -442,7 +470,11 @@ end;
 
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Subsubsection*
+Question 2
+\end_layout
+
+\begin_layout Standard
 Il est nécessaire de passer 
 \begin_inset Formula $t$
 \end_inset
@@ -453,7 +485,7 @@ Il est nécessaire de passer
 \end_inset
 
 .
- En effet, en passant un paramètre en entrée, le langage copie la mémoire
+ En effet, en passant un paramètre en entrée, le programme copie la mémoire
  occupée par 
 \begin_inset Formula $t$
 \end_inset
@@ -465,8 +497,8 @@ Il est nécessaire de passer
 \begin_inset Formula $t$
 \end_inset
 
- en entrée/sortie, le langage procède à un passage par adresse (ou par référence
-) de 
+ en entrée/sortie, le programme procède à un passage par adresse (ou par
+ référence) de 
 \begin_inset Formula $t$
 \end_inset
 
@@ -474,7 +506,52 @@ Il est nécessaire de passer
  que de dupliquer la mémoire.
 \end_layout
 
+\begin_layout Subsubsection*
+Question 3
+\end_layout
+
+\begin_layout Standard
+Pour comparer 2 int_array 
+\begin_inset Formula $a$
+\end_inset
+
+ et 
+\begin_inset Formula $b$
+\end_inset
+
+, on peut regarder plusieurs choses :
+\end_layout
+
 \begin_layout Enumerate
+Si 
+\begin_inset Formula $a$
+\end_inset
+
+ a moins de chiffre que 
+\begin_inset Formula $b$
+\end_inset
+
+, alors on a 
+\begin_inset Formula $a\leqslant b$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Sinon si 
+\begin_inset Formula $a$
+\end_inset
+
+ a autant de chiffre que 
+\begin_inset Formula $b$
+\end_inset
+
+, alors il faut trouver 2 chiffres différents en partant du chiffre de poid
+ fort, et comparer ses 2 chiffres.
+\end_layout
+
+\begin_layout Standard
 \begin_inset listings
 lstparams "language=Pascal,tabsize=4"
 inline false
@@ -589,11 +666,15 @@ end;
 Quotient d’un int_array par un longword et conversion décimale
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsection*
 Exercice 4
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Subsubsection*
+Question 1
+\end_layout
+
+\begin_layout Standard
 Montrons par récurrence la propriété 
 \begin_inset Formula $P_{N}$
 \end_inset
@@ -630,10 +711,7 @@ Donc pour
 \end_inset
 
  est vraie.
-\begin_inset Newline newline
-\end_inset
-
-Supposons maintenant la propriété vraie jusqu'au rang 
+ Supposons maintenant la propriété vraie jusqu'au rang 
 \begin_inset Formula $N\geqslant0$
 \end_inset
 
@@ -642,10 +720,7 @@ Supposons maintenant la propriété vraie jusqu'au rang
 \end_inset
 
 .
-\begin_inset Newline newline
-\end_inset
-
-On a 
+ On a 
 \begin_inset Formula 
 \begin{align*}
 \stackrel[n=0]{N+1}{\sum}q_{N+1-n}b^{n} & =q_{N+1}b^{0}+\stackrel[n=1]{N+1}{\sum}q_{N+1-n}b^{n}\\
@@ -688,15 +763,19 @@ d\stackrel[n=0]{N}{\sum}q_{N-n}b^{n}+r_{N+1}=\stackrel[n=0]{N}{\sum}a_{N-n}b^{n}
 
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Subsubsection*
+Question 2
+\end_layout
+
+\begin_layout Standard
 \begin_inset listings
-lstparams "language=Pascal,tabsize=4"
+lstparams "language=Pascal,breaklines=true,tabsize=4"
 inline false
 status open
 
 \begin_layout Plain Layout
 
-procedure div_by_digit (a : int_array; d : longword;
+procedure div_by_digit (a : int_array; d : longword; 
 \end_layout
 
 \begin_layout Plain Layout
@@ -716,7 +795,7 @@ begin
 
 \begin_layout Plain Layout
 
-	Normalize (a);
+	normalize (a);
 \end_layout
 
 \begin_layout Plain Layout
@@ -741,27 +820,190 @@ begin
 
 \begin_layout Plain Layout
 
-		begin
+	begin
 \end_layout
 
 \begin_layout Plain Layout
 
-			q[i] := (r * BASE + a[i]) div d;
+		q[i] := (r * BASE + a[i]) div d;
 \end_layout
 
 \begin_layout Plain Layout
 
-			r := (r * BASE + a[i]) mod d;
+		r := (r * BASE + a[i]) mod d;
 \end_layout
 
 \begin_layout Plain Layout
 
-		end;
+	end;
 \end_layout
 
 \begin_layout Plain Layout
 
-	Normalize (q);
+	normalize (q);
+\end_layout
+
+\begin_layout Plain Layout
+
+end;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Question 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Pascal,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+const digits = '0123456789';
+\end_layout
+
+\begin_layout Plain Layout
+
+procedure write_int_array (a : int_array);
+\end_layout
+
+\begin_layout Plain Layout
+
+var i, r : LongWord;
+\end_layout
+
+\begin_layout Plain Layout
+
+	q : int_array;
+\end_layout
+
+\begin_layout Plain Layout
+
+	entier_n : array of Char;
+\end_layout
+
+\begin_layout Plain Layout
+
+begin
+\end_layout
+
+\begin_layout Plain Layout
+
+	normalize (a);
+\end_layout
+
+\begin_layout Plain Layout
+
+	setLength (q, length (a));
+\end_layout
+
+\begin_layout Plain Layout
+
+	setLength (entier_n, 1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	i := 0;
+\end_layout
+
+\begin_layout Plain Layout
+
+	repeat
+\end_layout
+
+\begin_layout Plain Layout
+
+		// Pour obtenir l'écriture en base 10 d'un int_array, il
+\end_layout
+
+\begin_layout Plain Layout
+
+		// suffit de faire des divisions euclidiennes successive
+\end_layout
+
+\begin_layout Plain Layout
+
+		// par 10.
+ L'écriture en base 10 sera alors les
+\end_layout
+
+\begin_layout Plain Layout
+
+		// restes obtenus.
+\end_layout
+
+\begin_layout Plain Layout
+
+		div_by_digit (a, 10, q, r);
+\end_layout
+
+\begin_layout Plain Layout
+
+		a := copy (q, 0, length (q));
+\end_layout
+
+\begin_layout Plain Layout
+
+		entier_n[i] := digits[r + 1];
+\end_layout
+
+\begin_layout Plain Layout
+
+		i := i+1;
+\end_layout
+
+\begin_layout Plain Layout
+
+		setLength (entier_n, i+1);
+\end_layout
+
+\begin_layout Plain Layout
+
+	until ((length (a) = 1) and (a[0] < 10));
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	// a[0] est la valeur du dernier reste.
+\end_layout
+
+\begin_layout Plain Layout
+
+	entier_n[high (entier_n)] := digits[a[0] + 1];
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	for i := high (entier_n) downto 0 do
+\end_layout
+
+\begin_layout Plain Layout
+
+		write (entier_n[i]);
+\end_layout
+
+\begin_layout Plain Layout
+
+	writeln;
 \end_layout
 
 \begin_layout Plain Layout
@@ -778,7 +1020,7 @@ end;
 Somme et différence de deux int_array
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsection*
 Exercice 5
 \end_layout
 
@@ -791,10 +1033,7 @@ Pour réaliser la somme de deux int_array, il faut réaliser l'addition avec
 \end_inset
 
 ), on ajoute la retenue au chiffre suivant.
-\end_layout
-
-\begin_layout Standard
-Exemple:
+ Par exemple:
 \end_layout
 
 \begin_layout Standard
@@ -807,9 +1046,9 @@ Exemple:
 
 \end_inset
 
-On voit à l'étape que la valeur de la retenue est le quotient de la division
- euclidienne de la somme par la base, et que on remplace la somme par le
- reste.
+On voit à l'étape (a) que la valeur de la retenue est le quotient de la
+ division euclidienne de la somme par la base, et que on remplace la somme
+ par le reste.
  On peut généraliser cela :
 \end_layout
 
@@ -897,7 +1136,7 @@ begin
 
 \begin_layout Plain Layout
 
-	Normalize (a); Normalize (b);
+	normalize (a); normalize (b);
 \end_layout
 
 \begin_layout Plain Layout
@@ -917,7 +1156,12 @@ begin
 
 \begin_layout Plain Layout
 
- 	begin
+	begin
+\end_layout
+
+\begin_layout Plain Layout
+
+		s := nil;
 \end_layout
 
 \begin_layout Plain Layout
@@ -928,6 +1172,10 @@ begin
 \begin_layout Plain Layout
 
 		retenue := 0;
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -962,7 +1210,7 @@ begin
 
 \begin_layout Plain Layout
 
-			if i <= High (b) then
+			if i <= high (b) then
 \end_layout
 
 \begin_layout Plain Layout
@@ -982,6 +1230,10 @@ begin
 
 \begin_layout Plain Layout
 
+\end_layout
+
+\begin_layout Plain Layout
+
 			retenue := 0;
 \end_layout
 
@@ -997,6 +1249,10 @@ begin
 
 \begin_layout Plain Layout
 
+\end_layout
+
+\begin_layout Plain Layout
+
 			s[i] := somme mod BASE;
 \end_layout
 
@@ -1007,7 +1263,7 @@ begin
 
 \begin_layout Plain Layout
 
-		Normalize (s);
+		normalize (s);
 \end_layout
 
 \begin_layout Plain Layout
@@ -1083,7 +1339,12 @@ begin
 
 \begin_layout Plain Layout
 
-	Normalize (a); Normalize (b); 
+	normalize (a); normalize (b); 
+\end_layout
+
+\begin_layout Plain Layout
+
+	s := nil;
 \end_layout
 
 \begin_layout Plain Layout
@@ -1094,6 +1355,10 @@ begin
 \begin_layout Plain Layout
 
 	retenue := 0;
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -1123,7 +1388,7 @@ begin
 
 \begin_layout Plain Layout
 
-		if i <= High (b) then
+		if i <= high (b) then
 \end_layout
 
 \begin_layout Plain Layout
@@ -1139,6 +1404,10 @@ begin
 \begin_layout Plain Layout
 
 			difference := a[i] + retenue;
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -1178,6 +1447,10 @@ begin
 
 \begin_layout Plain Layout
 
+\end_layout
+
+\begin_layout Plain Layout
+
 		s[i] := difference mod BASE;
 \end_layout
 
@@ -1188,7 +1461,7 @@ begin
 
 \begin_layout Plain Layout
 
-	Normalize (s);
+	normalize (s);
 \end_layout
 
 \begin_layout Plain Layout
@@ -1205,7 +1478,7 @@ end;
 Produit naïf de deux int_array
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsection*
 Exercice 6
 \end_layout
 
@@ -1251,12 +1524,31 @@ begin
 
 \begin_layout Plain Layout
 
-	Normalize (a); Normalize (b);
+	normalize (a); normalize (b);
+\end_layout
+
+\begin_layout Plain Layout
+
+	p := nil;
 \end_layout
 
 \begin_layout Plain Layout
 
 	setLength (p, length (a) + length (b) + 1);
+\end_layout
+
+\begin_layout Plain Layout
+
+	retenue_ld := 0;
+\end_layout
+
+\begin_layout Plain Layout
+
+	bs_atteinte := 0;
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -1297,16 +1589,6 @@ begin
 
 \begin_layout Plain Layout
 
-	retenue_ld := 0;
-\end_layout
-
-\begin_layout Plain Layout
-
-	bs_atteinte := 0;
-\end_layout
-
-\begin_layout Plain Layout
-
 	for n:=0 to high (a) do
 \end_layout
 
@@ -1318,6 +1600,10 @@ begin
 \begin_layout Plain Layout
 
 		retenue := 0;
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -1347,12 +1633,20 @@ begin
 
 \begin_layout Plain Layout
 
+\end_layout
+
+\begin_layout Plain Layout
+
 			retenue := produit div BASE;
 \end_layout
 
 \begin_layout Plain Layout
 
 			p[n+m] := (p[n+m] + produit) mod BASE;
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -1377,7 +1671,11 @@ begin
 
 \begin_layout Plain Layout
 
- 			end;
+			end;
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -1402,7 +1700,7 @@ begin
 
 \begin_layout Plain Layout
 
-	Normalize (p);
+	normalize (p);
 \end_layout
 
 \begin_layout Plain Layout
@@ -1419,11 +1717,15 @@ end;
 Tests (et un peu d’arithmétique)
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsection*
 Exercice 7
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Subsubsection*
+Question 1
+\end_layout
+
+\begin_layout Standard
 Soit un entier 
 \begin_inset Formula $m$
 \end_inset
@@ -1479,10 +1781,6 @@ Ainsi, dans
 
 \end_inset
 
-
-\begin_inset Newline newline
-\end_inset
-
 Donc un entier 
 \begin_inset Formula $m$
 \end_inset
@@ -1493,6 +1791,154 @@ Donc un entier
 
  est divisible par 17 si, et seulement si, la somme de ses chiffres est
  divisible par 17.
+\end_layout
+
+\begin_layout Subsubsection*
+Question 2
+\end_layout
+
+\begin_layout Standard
+Par définition, on sait que 
+\begin_inset Formula 
+\[
+51^{2020}=\prod_{i=1}^{2020}51=51\times\prod_{i=2}^{2020}51
+\]
+
+\end_inset
+
+On en déduit donc l'algorithme suivant pour calculer 
+\begin_inset Formula $51^{2020}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Pascal,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+var N1, N2:int_array;
+\end_layout
+
+\begin_layout Plain Layout
+
+    i:Longword;
+\end_layout
+
+\begin_layout Plain Layout
+
+begin
+\end_layout
+
+\begin_layout Plain Layout
+
+	N1 := int_array.create (51);
+\end_layout
+
+\begin_layout Plain Layout
+
+	N2 := int_array.create (51);
+\end_layout
+
+\begin_layout Plain Layout
+
+	for i := 2 to 2020 do
+\end_layout
+
+\begin_layout Plain Layout
+
+	    prod (N1, N2, N1);
+\end_layout
+
+\begin_layout Plain Layout
+
+end.
+\end_layout
+
+\end_inset
+
+Cet algorithme nous permet de calculer un chiffre de 
+\begin_inset Formula $3450$
+\end_inset
+
+ chiffres.
+\end_layout
+
+\begin_layout Subsubsection*
+Question 3
+\end_layout
+
+\begin_layout Standard
+Un int_array est un tableau contenant l'écriture d'une nombre en base 
+\begin_inset Formula $2^{32}$
+\end_inset
+
+, il faut donc sommer les éléments de ce tableau pour voir si un int_array
+ est divisible par 
+\begin_inset Formula $17$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Pascal,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function estDivisiblePar17(a: int_array): Boolean;
+\end_layout
+
+\begin_layout Plain Layout
+
+var i:longword;
+\end_layout
+
+\begin_layout Plain Layout
+
+    somme:qword;
+\end_layout
+
+\begin_layout Plain Layout
+
+begin
+\end_layout
+
+\begin_layout Plain Layout
+
+	somme := 0;
+\end_layout
+
+\begin_layout Plain Layout
+
+	for i := 0 to high (a) do
+\end_layout
+
+\begin_layout Plain Layout
+
+	    somme := somme + a[i];
+\end_layout
+
+\begin_layout Plain Layout
+
+	estDivisiblePar17 := (somme mod 17) = 0;
+\end_layout
+
+\begin_layout Plain Layout
+
+end; 
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body

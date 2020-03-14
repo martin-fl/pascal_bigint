@@ -11,6 +11,7 @@ const BASE: QWord = 1 shl 32;
 type int_array = array of LongWord;
 
 procedure write_digits(a: int_array);
+procedure write_int_array (a : int_array);
 
 procedure normalize (var t: int_array);
 function smaller (a, b: int_array) : Boolean;
@@ -84,12 +85,13 @@ var i: LongWord;
 	somme: QWord;
 	retenue: LongWord;
 begin
-	Normalize (a); Normalize (b);
+	normalize (a); normalize (b);
 
 	if smaller (a, b) then
 		sum (b, a, s)
 	else 
 	begin
+		s := nil;
 		setLength (s, length (a) + 1);
 
 		retenue := 0;
@@ -108,7 +110,7 @@ begin
 
 			s[i] := somme mod BASE;
 		end;
-		Normalize (s);
+		normalize (s);
 	end;
 end;
 
@@ -118,8 +120,8 @@ procedure diff (a, b: int_array; var s: int_array);
 var i: LongWord;
 	difference, retenue: Int64;
 begin
-	Normalize (a); Normalize (b);
-	
+	normalize (a); normalize (b);
+	s := nil;
 	setLength (s, length (a));
 
 	retenue := 0;
@@ -142,7 +144,7 @@ begin
 		s[i] := difference mod BASE;
 	end;
 
-	Normalize (s);
+	normalize (s);
 end;
 
 // retenue_ld = retenue longue durée
@@ -151,16 +153,17 @@ var n, m: Longword;
 	produit: QWord;
 	retenue, retenue_ld, bs_atteinte: LongWord;
 begin
-	Normalize (a); Normalize (b);
+	normalize (a); normalize (b);
+	p := nil;
 	setLength (p, length (a) + length (b) + 1);
 
-	// ça marche mais à refaire?
-	// explication :
-	// la somme n+m n'est pas croissante dans la boucle ci-dessous,
-	// donc il faut conserver la retenue quand on retourne sur une
-	// valeur inférieure de n+m, et l'ajouter quand atteint n+m+1
-	// de plus, quand on atteint high(a)+high(b) il faut déplacer
-	// la retenue à high(a)+high(b)+1
+	// La somme n+m n'est pas croissante
+	// dans la boucle ci-dessous, donc il
+	// faut conserver la retenue quand on retourne sur une
+	// valeur inférieure de n+m, et l'ajouter
+	// quand atteint n+m+1. De plus, quand on 
+	// atteint high (a) + high (b) il faut déplacer
+	// la retenue à high (a) + high(b) + 1
 	retenue_ld := 0;
 	bs_atteinte := 0;
 	for n:=0 to high (a) do
@@ -183,24 +186,53 @@ begin
 		end;
 	end;
 
-	Normalize (p);
+	normalize (p);
 end;
 
 procedure div_by_digit (a : int_array; d : longword; var q : int_array; var r : longword);
-
 var i, N : LongWord;
-
 begin
-	Normalize (a);
+	normalize (a);
 	setLength (q, length (a));
 	r := 0;
 	N := length (a) - 1;
 	for i := N downto 0 do
-		begin
-			q[i] := (r * BASE + a[i]) div d;
-			r := (r * BASE + a[i]) mod d;
-		end;
-	Normalize (q);
+	begin
+		q[i] := (r * BASE + a[i]) div d;
+		r := (r * BASE + a[i]) mod d;
+	end;
+	normalize (q);
+end;
+
+const digits = '0123456789';
+procedure write_int_array (a : int_array);
+var i, r : LongWord;
+	q : int_array;
+	entier_n : array of Char;
+begin
+	normalize (a);
+	setLength (q, length (a));
+	setLength (entier_n, 1);
+	
+	i := 0;
+	repeat
+		// Pour obtenir l'écriture en base 10 d'un int_array, il
+		// suffit de faire des divisions euclidiennes successive par 10.
+		// L'écriture en base 10 sera alors les restes obtenus.
+		div_by_digit (a, 10, q, r);
+		a := copy (q, 0, length (q));
+		entier_n[i] := digits[r + 1];
+		i := i+1;
+		setLength (entier_n, i+1);
+	until ((length (a) = 1) and (a[0] < 10));
+	
+	// a[0] est la valeur du dernier reste.
+	entier_n[high (entier_n)] := digits[a[0] + 1];
+	
+	for i := high (entier_n) downto 0 do
+		write (entier_n[i]);
+
+	writeln;
 end;
 
 end.
