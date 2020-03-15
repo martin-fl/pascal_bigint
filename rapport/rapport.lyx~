@@ -289,6 +289,7 @@ On voit alors que en stockant les chiffres de
 
  de la mémoire est utilisée inutilement par rapport à l'écriture binaire
  classique.
+ 
 \end_layout
 
 \begin_layout Subsection*
@@ -663,7 +664,7 @@ end;
 \end_layout
 
 \begin_layout Section
-Quotient d’un int_array par un longword et conversion décimale
+Quotient d’un int_array par un LongWord et conversion décimale
 \end_layout
 
 \begin_layout Subsection*
@@ -775,12 +776,12 @@ status open
 
 \begin_layout Plain Layout
 
-procedure div_by_digit (a : int_array; d : longword; 
+procedure div_by_digit (a : int_array; d : LongWord; 
 \end_layout
 
 \begin_layout Plain Layout
 
-						var q : int_array; var r : longword);
+						var q : int_array; var r : LongWord);
 \end_layout
 
 \begin_layout Plain Layout
@@ -1482,6 +1483,79 @@ Produit naïf de deux int_array
 Exercice 6
 \end_layout
 
+\begin_layout Subsubsection*
+Question 1
+\end_layout
+
+\begin_layout Standard
+Soient 
+\begin_inset Formula $x$
+\end_inset
+
+ et 
+\begin_inset Formula $y$
+\end_inset
+
+ deux naturels.
+ Soient 
+\begin_inset Formula $\left(x_{k}\right)_{k=0..n}$
+\end_inset
+
+ et 
+\begin_inset Formula $\left(y_{k'}\right)_{k'=0..m}$
+\end_inset
+
+ leurs chiffres en base 
+\begin_inset Formula $b$
+\end_inset
+
+.
+ On a alors
+\begin_inset Formula 
+\begin{align*}
+x\times y & =\left(\sum_{k=0}^{n}x_{k}b^{k}\right)\left(\sum_{k'=0}^{m}y_{k'}b^{k'}\right)\\
+ & =\sum_{k=0}^{n}x_{k}\left(\sum_{k'=0}^{m}y_{k'}b^{k'}\right)b^{k}\\
+ & =\sum_{k=0}^{n}\sum_{k'=0}^{m}x_{k}y_{k'}b^{k+k'}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Question 2
+\end_layout
+
+\begin_layout Standard
+Pour tout 
+\begin_inset Formula $k,k'\in\{1,\dots,n\}\times\{1,\dots,m\}$
+\end_inset
+
+, on a 
+\begin_inset Formula 
+\[
+x_{k}y_{k'}<2^{32}\times2^{32}=2^{64}
+\]
+
+\end_inset
+
+Donc le produit 
+\begin_inset Formula $x_{k}y_{k'}$
+\end_inset
+
+ est son propre représentant dans 
+\begin_inset Formula $\mathbb{Z}/2^{64}\mathbb{Z}$
+\end_inset
+
+, donc le calcul est exact comme la machine sur laquelle va s'éxécuter le
+ code est une machine 64 bits.
+\end_layout
+
+\begin_layout Subsubsection*
+Question 3
+\end_layout
+
 \begin_layout Standard
 Pour réaliser le produit de deux int_array, on applique l'algorithme décrit
  dans l'exercice 2, en utilisant la base 
@@ -1504,7 +1578,7 @@ procedure prod (a, b : int_array; var p : int_array);
 
 \begin_layout Plain Layout
 
-var n, m: Longword;
+var n, m: LongWord;
 \end_layout
 
 \begin_layout Plain Layout
@@ -1713,6 +1787,10 @@ end;
 
 \end_layout
 
+\begin_layout Subsubsection*
+Question 4
+\end_layout
+
 \begin_layout Section
 Tests (et un peu d’arithmétique)
 \end_layout
@@ -1826,7 +1904,7 @@ var N1, N2:int_array;
 
 \begin_layout Plain Layout
 
-    i:Longword;
+    i:LongWord;
 \end_layout
 
 \begin_layout Plain Layout
@@ -1898,12 +1976,12 @@ function estDivisiblePar17(a: int_array): Boolean;
 
 \begin_layout Plain Layout
 
-var i:longword;
+var i:LongWord;
 \end_layout
 
 \begin_layout Plain Layout
 
-    somme:qword;
+    somme:QWord;
 \end_layout
 
 \begin_layout Plain Layout

@@ -1793,13 +1793,7 @@ Question 4
 
 \begin_layout Standard
 D'après le code ci-dessus, on voit que l'on fait une multiplication de longword
- par itération de la boucle intérieure, et cette boucle tourne à chaque
- itération de la boucle extérieure.
- On peut alors conclure qu'il y a 
-\begin_inset Formula $n\times m$
-\end_inset
-
- multiplications sur des longwords par multiplication de int_array.
+ par 
 \end_layout
 
 \begin_layout Section

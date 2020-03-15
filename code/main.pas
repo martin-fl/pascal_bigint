@@ -25,6 +25,5 @@ begin
 
   // Doit affichier "TRUE"
   writeln(estDivisiblePar17(N1));
-
 end.
 
