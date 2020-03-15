@@ -20,7 +20,7 @@ procedure sum(a, b: int_array; var s: int_array);
 procedure diff (a, b: int_array; var s: int_array);
 procedure prod (a, b : int_array; var p : int_array);
 
-procedure div_by_digit (a : int_array; d : longword; var q : int_array; var r : longword);
+procedure div_by_digit (a : int_array; d : LongWord; var q : int_array; var r : LongWord);
 
 implementation
 
@@ -189,10 +189,11 @@ begin
 	normalize (p);
 end;
 
-procedure div_by_digit (a : int_array; d : longword; var q : int_array; var r : longword);
+procedure div_by_digit (a : int_array; d : LongWord; var q : int_array; var r : LongWord);
 var i, N : LongWord;
 begin
 	normalize (a);
+	q := nil;
 	setLength (q, length (a));
 	r := 0;
 	N := length (a) - 1;
@@ -208,7 +209,7 @@ const digits = '0123456789';
 procedure write_int_array (a : int_array);
 var i, r : LongWord;
 	q : int_array;
-	entier_n : array of Char;
+	entier_n : array of char;
 begin
 	normalize (a);
 	setLength (q, length (a));
